@@ -18,7 +18,7 @@ install_packages () {
 
   install_vhd_util
 
-  local apt_get="apt-get --no-install-recommends -q -y --force-yes"
+  local apt_get="apt-get --no-install-recommends -q -y"
 
   #32 bit architecture support:: not required for 32 bit template
   if [ "${arch}" != "i386" ]; then
@@ -27,14 +27,13 @@ install_packages () {
     ${apt_get} install links:i386 libuuid1:i386 libc6:i386
   fi
 
-  ${apt_get} -t wheezy-backports install keepalived irqbalance open-vm-tools qemu-guest-agent haproxy iputils-ping
-  ${apt_get} -t wheezy-backports install strongswan libcharon-extra-plugins libstrongswan-extra-plugins
+  ${apt_get} install keepalived irqbalance open-vm-tools qemu-guest-agent haproxy iputils-ping
+  ${apt_get} install strongswan libcharon-extra-plugins libstrongswan-extra-plugins openjdk-8-jre-headless
 
-  ${apt_get} -t wheezy-backports install initramfs-tools
-  ${apt_get} -t wheezy-backports install linux-image-3.16.0-0.bpo.4-amd64
+  ${apt_get} install initramfs-tools
 
   apt-get update
-  apt-get -y --force-yes upgrade
+  apt-get -y upgrade
 
   if [ "${arch}" == "amd64" ]; then
     # XS tools
